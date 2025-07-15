@@ -1,4 +1,4 @@
-service: debs-serverless-api
+service: debts-serverless-api
 frameworkVersion: "4"
 
 provider:
