@@ -1,5 +1,5 @@
-service: debs-serverless-api
-frameworkVersion: '4'
+service: debts-serverless-api
+frameworkVersion: "4"
 
 provider:
   name: aws
@@ -8,7 +8,7 @@ provider:
   environment:
     SUPABASE_URL: ${env:SUPABASE_URL}
     SUPABASE_KEY: ${env:SUPABASE_KEY}
-    STAGE: ${opt:stage, 'dev'} # Agregar variable de entorno para el stage
+    STAGE: ${opt:stage, 'dev'}
     IS_OFFLINE: ${opt:isOffline, 'false'}
 
 plugins:
@@ -19,7 +19,42 @@ functions:
     name: LambdaDebts-${opt:stage, 'dev'}
     handler: src/infrastructure/lambdas/handler.handler
     events:
+      # Rutas para TypeDebt
       - http:
-          path: /clients
+          path: /type-debts
+          method: get
+          cors: true
+      - http:
+          path: /type-debts
           method: post
+          cors: true
+      - http:
+          path: /type-debts/{id}
+          method: put
+          cors: true
+      - http:
+          path: /type-debts/{id}
+          method: delete
+          cors: true
+      # Rutas para VehicleDebt
+      - http:
+          path: /vehicle-debts
+          method: get
+          cors: true
+      - http:
+          path: /vehicle-debts
+          method: post
+          cors: true
+      - http:
+          path: /vehicle-debts/{id}
+          method: put
+          cors: true
+      - http:
+          path: /vehicle-debts/{id}
+          method: delete
+          cors: true
+      # Ruta para obtener deudas por vehicle_id
+      - http:
+          path: /vehicles/{vehicleId}/debts
+          method: get
           cors: true
