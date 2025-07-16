@@ -51,6 +51,10 @@ functions:
           cors: true
       - http:
           path: /vehicle-debts/{id}
+          method: patch
+          cors: true
+      - http:
+          path: /vehicle-debts/{id}
           method: delete
           cors: true
       # Ruta para obtener deudas por vehicle_id

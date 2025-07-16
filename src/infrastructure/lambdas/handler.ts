@@ -165,6 +165,18 @@ export const handler: APIGatewayProxyHandler = async (event) => {
       };
     }
 
+    // Ruta para actualizar parcialmente VehicleDebt
+    if (path.startsWith("/vehicle-debts/") && httpMethod === "PATCH") {
+      const id = parseInt(path.split("/")[2]);
+      const body = JSON.parse(event.body || "{}");
+
+      const vehicleDebt = await updateVehicleDebt.execute(id, body);
+      return {
+        statusCode: 200,
+        body: JSON.stringify(vehicleDebt),
+      };
+    }
+
     // Ruta para eliminar VehicleDebt
     if (path.startsWith("/vehicle-debts/") && httpMethod === "DELETE") {
       const id = parseInt(path.split("/")[2]);
